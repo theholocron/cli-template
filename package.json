@@ -39,7 +39,7 @@
     "@changesets/cli": "^2.27.9",
     "@theholocron/commitlint-config": "^2.0.0",
     "@theholocron/eslint-config": "^2.0.0",
-    "@theholocron/jest-config": "^2.0.0",
+    "@theholocron/jest-config": "^3.1.0",
     "@theholocron/lint-staged-config": "^2.0.0",
     "@theholocron/prettier-config": "^2.0.0",
     "@theholocron/tsconfig": "^2.0.0"
