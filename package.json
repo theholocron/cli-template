@@ -38,7 +38,7 @@
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.9",
     "@theholocron/commitlint-config": "^3.1.0",
-    "@theholocron/eslint-config": "^2.0.0",
+    "@theholocron/eslint-config": "^3.4.4",
     "@theholocron/jest-config": "^2.0.0",
     "@theholocron/lint-staged-config": "^2.0.0",
     "@theholocron/prettier-config": "^2.0.0",
