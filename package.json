@@ -1,47 +1,63 @@
 {
-  "name": "@theholocron/<name>",
+  "name": "@theholocron/cli-template",
   "description": "<description>",
-  "homepage": "https://github.com/theholocron/<name>#readme",
+  "homepage": "https://github.com/theholocron/cli-template#readme",
   "author": "Newton Koumantzelis",
+  "main": "src/index.ts",
+  "module": "dist/cli-template.es.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "chewy": "./src/cli.ts"
+  },
+  "man": "./man/cli-template.1",
+  "exports": {
+    ".": {
+      "import": "./dist/cli-template.es.js",
+      "require": "./dist/cli-template.cjs.js"
+    }
+  },
+  "files": [
+    "dist/*"
+  ],
+  "type": "module",
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/theholocron/<name>.git"
+    "url": "git+https://github.com/theholocron/cli-template.git"
   },
-  "bugs": "https://github.com/theholocron/<name>/issues",
-  "releases": "https://github.com/theholocron/<name>/releases",
-  "wiki": "https://github.com/theholocron/<name>/wiki",
+  "bugs": "https://github.com/theholocron/cli-template/issues",
+  "releases": "https://github.com/theholocron/cli-template/releases",
+  "wiki": "https://github.com/theholocron/cli-template/wiki",
   "license": "GPL-3.0",
   "packageManager": "npm@9.5.0",
-  "commitlint": {
-    "extends": "@theholocron"
-  },
-  "eslintConfig": {
-    "extends": "@theholocron"
-  },
-  "jest": {
-    "displayName": "<name>",
-    "preset": "@theholocron/jest-config"
-  },
   "publishConfig": {
     "access": "public"
   },
-  "prettier": "@theholocron/prettier-config",
   "scripts": {
-    "build": "tsc --noEmit",
-    "lint": "eslint --ignore-path .gitignore '**/*.{js,jsx,ts,tsx}'",
-    "release": "changeset",
-    "start": "",
-    "test": "jest"
+    "dev": "vite",
+    "build": "vite build",
+    "postbuild": "marked-man README.md > man/cli-template.1",
+    "lint": "docker run -e LOG_LEVEL=DEBUG -e RUN_LOCAL=true -v .:/tmp/lint --rm ghcr.io/super-linter/super-linter:latest",
+    "preview": "vite preview",
+    "start": "tsx ./src/cli.ts",
+    "test": "vitest"
+
+  },
+  "engines": {
+    "node": ">=23",
+    "npm": ">=10"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.5.0",
-    "@changesets/cli": "^2.27.9",
-    "@theholocron/commitlint-config": "^3.1.0",
+    "@theholocron/commitlint-config": "^3.4.4",
     "@theholocron/eslint-config": "^3.4.4",
     "@theholocron/jest-config": "^3.4.4",
-    "@theholocron/lint-staged-config": "^3.1.0",
-    "@theholocron/prettier-config": "^2.0.0",
-    "@theholocron/tsconfig": "^3.1.0"
+    "@theholocron/lint-staged-config": "^3.4.4",
+    "@theholocron/prettier-config": "^3.4.4",
+    "@theholocron/storybook-config": "^3.4.4",
+    "@theholocron/stylelint-config": "^3.4.4",
+    "@theholocron/tsconfig": "^3.4.4",
+    "@tsconfig/node-lts": "^20.1.3",
+    "alexjs": "^1.0.0",
+    "vite": "^5.4.9"
   }
 }
