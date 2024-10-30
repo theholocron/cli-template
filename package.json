@@ -3,22 +3,11 @@
   "description": "<description>",
   "homepage": "https://github.com/theholocron/cli-template#readme",
   "author": "Newton Koumantzelis",
-  "main": "src/index.ts",
-  "module": "dist/cli-template.es.js",
-  "types": "dist/index.d.ts",
+  "main": "src/cli.ts",
   "bin": {
-    "chewy": "./src/cli.ts"
+    "cli-template": "./src/cli.ts"
   },
   "man": "./man/cli-template.1",
-  "exports": {
-    ".": {
-      "import": "./dist/cli-template.es.js",
-      "require": "./dist/cli-template.cjs.js"
-    }
-  },
-  "files": [
-    "dist/*"
-  ],
   "type": "module",
   "version": "0.1.0",
   "repository": {
@@ -34,18 +23,28 @@
     "access": "public"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
     "postbuild": "marked-man README.md > man/cli-template.1",
     "lint": "docker run -e LOG_LEVEL=DEBUG -e RUN_LOCAL=true -v .:/tmp/lint --rm ghcr.io/super-linter/super-linter:latest",
-    "preview": "vite preview",
-    "start": "tsx ./src/cli.ts",
-    "test": "vitest"
-
+    "start": "tsx ./src/cli.ts"
   },
   "engines": {
     "node": ">=23",
     "npm": ">=10"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^7.0.1",
+    "chalk": "^5.3.0",
+    "conf": "^13.0.1",
+    "default-browser": "^5.2.1",
+    "dotenv": "^16.4.5",
+    "inquirer-autocomplete-standalone": "^0.8.1",
+    "open": "^10.1.0",
+    "open-editor": "^4.1.1",
+    "ora": "^8.1.0",
+    "play-sound": "^1.1.6",
+    "update-notifier": "^7.3.1",
+    "winston": "^3.15.0",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@theholocron/commitlint-config": "^3.4.4",
@@ -57,7 +56,14 @@
     "@theholocron/stylelint-config": "^3.4.4",
     "@theholocron/tsconfig": "^3.4.4",
     "@tsconfig/node-lts": "^20.1.3",
+    "@types/conf": "^2.1.0",
+    "@types/inquirer": "^9.0.7",
+    "@types/play-sound": "^1.1.2",
+    "@types/update-notifier": "^6.0.8",
+    "@types/winston": "^2.4.4",
+    "@types/yargs": "^17.0.33",
     "alexjs": "^1.0.0",
-    "vite": "^5.4.9"
+    "marked-man": "^2.1.0",
+    "tsx": "^4.19.2"
   }
 }

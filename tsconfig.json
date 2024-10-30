@@ -5,6 +5,7 @@
     "baseUrl": "./",
     "outDir": "./dist",
     "paths": {
+      "@/media": ["./media/*"],
       "@/package": ["./package.json"],
       "@/*": ["./src/*"]
     }
