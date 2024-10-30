@@ -38,7 +38,7 @@ jobs:
           DISABLE_COMMENTS: false  # Enable comments in the PR
           IGNORE_GITIGNORED_FILES: true
           LINTER_RULES_PATH: /
-          CSS_FILE_NAME: "stylelint.config.js"
+          # CSS_FILE_NAME: "stylelint.config.js"
           EDITORCONFIG_FILE_NAME: ".editorconfig-checker.json"
           # FIX_CSS_PRETTIER: true
           FIX_ENV: true
