@@ -1,6 +1,5 @@
 #!/usr/bin/env npx tsx
 
-import * as path from "node:path";
 import updateNotifier from "update-notifier";
 import { hideBin } from "yargs/helpers";
 import yargs from "yargs/yargs";
@@ -19,6 +18,7 @@ export interface CLIOptions {
 	// spinner: Ora;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 yargs(hideBin(process.argv))
 	.usage("Usage: $0 <command> [options]")
 	.commandDir(__cmddir("./commands"), {

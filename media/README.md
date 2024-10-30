@@ -1,6 +1,6 @@
 # Media
 
-The following is a storage place for all of the media used within `cli-template`.
+The following is a storage place for all of the media used.
 
 ## What's Available
 

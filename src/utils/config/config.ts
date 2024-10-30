@@ -1,4 +1,3 @@
-// @ts-ignore
 import Conf, { type Schema } from "conf";
 import pkg from "@/package";
 
