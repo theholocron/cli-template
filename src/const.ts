@@ -16,4 +16,4 @@ export const SYSTEM_IGNORED_FOLDERS = [
 	"Public",
 	"Users",
 ] as const;
-export type IgnoredFolders = typeof SYSTEM_IGNORED_FOLDERS[number];
+export type IgnoredFolders = (typeof SYSTEM_IGNORED_FOLDERS)[number];

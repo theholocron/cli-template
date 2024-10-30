@@ -59,7 +59,6 @@ yargs(hideBin(process.argv))
 	.strict()
 	.help("h")
 	.version()
-	.epilogue(`© 2024-${new Date().getFullYear()} The Holocron, Inc. All rights reserved.`)
-	.argv as CLIOptions;
+	.epilogue(`© 2024-${new Date().getFullYear()} The Holocron, Inc. All rights reserved.`).argv as CLIOptions;
 
 updateNotifier({ pkg }).notify();

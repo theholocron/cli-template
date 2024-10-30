@@ -19,8 +19,8 @@ export const levels: Record<LogLevel, string> = {
 	debug: "debug.log",
 };
 
-export const builder: CommandBuilder<LogOpts, LogOpts> = (yargs) => yargs
-	.options({
+export const builder: CommandBuilder<LogOpts, LogOpts> = (yargs) =>
+	yargs.options({
 		l: {
 			alias: ["level", "log-level"],
 			choices: Object.keys(levels) as LogLevel[],
@@ -33,7 +33,7 @@ export const builder: CommandBuilder<LogOpts, LogOpts> = (yargs) => yargs
 			default: 20,
 			describe: "Maximum number of lines to show, from the end of the file",
 			type: "number",
-		}
+		},
 	});
 export const command: string = "log";
 export const desc: string = "Print out the logs";
@@ -44,7 +44,7 @@ export const desc: string = "Print out the logs";
  * @param {string} [level='all'] - The log level to read (e.g., 'all', 'error'). Defaults to 'all'.
  * @param {number} [maxLines] - The number of lines to display from the end of the log file. If not provided, displays the entire file.
  */
-export async function handler (options: LogOpts): Promise<void> {
+export async function handler(options: LogOpts): Promise<void> {
 	const { level, maxLines } = options;
 	const logFilePath = `${config.get("preferences.logs")}/${levels[level || "all"] || levels.all}`;
 	const fileStream = fs.createReadStream(logFilePath);
@@ -53,7 +53,7 @@ export async function handler (options: LogOpts): Promise<void> {
 		crlfDelay: Infinity,
 	});
 
-	const lines: { number: number, content: string }[] = [];
+	const lines: { number: number; content: string }[] = [];
 	let lineNumber = 0;
 
 	rl.on("line", (line: string) => {
@@ -79,9 +79,10 @@ export async function handler (options: LogOpts): Promise<void> {
 
 			// Apply magenta style to bracketed content
 			message = message.replace(/\[([^\]]+)\]/g, (match, p1) => `${bracketStyle(`[${p1}]`)}`);
-			console.log(`${chalk.gray(number)}: ${timestampStyle(`[${timestamp}]`)} ${levelStyle(level)}: ${messageStyle(message)}`);
-		}
-		else {
+			console.log(
+				`${chalk.gray(number)}: ${timestampStyle(`[${timestamp}]`)} ${levelStyle(level)}: ${messageStyle(message)}`
+			);
+		} else {
 			// Apply magenta style to bracketed content in lines that don't match the main pattern
 			content = content.replace(/\[([^\]]+)\]/g, (match, p1) => `${bracketStyle(`[${p1}]`)}`);
 			console.log(`${chalk.gray(number)}: ${content}`); // If the line doesn't match the expected format, print it as is with line number

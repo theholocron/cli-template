@@ -21,24 +21,17 @@ export const preferences = {
 	ignoredFolders: {
 		type: "array",
 		items: {
-			type: "string"
+			type: "string",
 		},
 		uniqueItems: true,
-		default: [
-			".DS_Store",
-			"cli-template",
-			"coverage",
-			"dist",
-			"node_modules",
-		],
+		default: [".DS_Store", "cli-template", "coverage", "dist", "node_modules"],
 	},
 	logs: {
 		type: "string",
-		default: process.env.LOG_DIR
-			|| (OS === "win32"
-				? path.join(
-					process.env.LOCALAPPDATA
-					|| path.join(HOME, "AppData", "Local"), "CLITemplate", "logs")
+		default:
+			process.env.LOG_DIR ||
+			(OS === "win32"
+				? path.join(process.env.LOCALAPPDATA || path.join(HOME, "AppData", "Local"), "CLITemplate", "logs")
 				: path.join(HOME, ".cli-template", "logs")),
 	},
 	notifications: {

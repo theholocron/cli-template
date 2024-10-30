@@ -4,7 +4,7 @@ import { config, log } from "@/utils";
 
 export const command: string = "edit";
 export const desc: string = "Edit the configuration";
-export async function handler (options: CLIOptions): Promise<void> {
+export async function handler(options: CLIOptions): Promise<void> {
 	const FN = "conf edit";
 	log.data(FN, "arguments", options, options);
 

@@ -23,8 +23,7 @@ const readEnv = <T = Record<string, string>>(key?: string): ReadEnvReturn<T> => 
 		}
 
 		return [null, parsedData as T];
-	}
-	catch (error) {
+	} catch (error) {
 		return [error as Error, {} as T];
 	}
 };
@@ -47,8 +46,7 @@ const writeEnv = (obj: Record<string, string>): [Error | null, boolean] => {
 
 		fs.writeFileSync(ENV_CONF, content, { flag: "w+" });
 		return [null, true];
-	}
-	catch (err) {
+	} catch (err) {
 		return [err as Error, false];
 	}
 };

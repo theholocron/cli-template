@@ -2,13 +2,12 @@ import play from "play-sound";
 
 const player = play();
 
-async function playSound (soundPath: string): Promise<void> {
+async function playSound(soundPath: string): Promise<void> {
 	return new Promise((resolve, reject) => {
 		player.play(soundPath, (err: Error | null) => {
 			if (err) {
 				reject(err);
-			}
-			else {
+			} else {
 				resolve();
 			}
 		});

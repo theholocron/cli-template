@@ -7,20 +7,21 @@ interface AddConfOpts extends CLIOptions {
 	value: any;
 }
 
-export const builder: CommandBuilder<AddConfOpts, AddConfOpts> = (yargs) => yargs
-	.positional("name", {
-		demandOption: true,
-		describe: "A key to store as within the configuration file",
-		type: "string",
-	})
-	.positional("value", {
-		demandOption: true,
-		describe: "The value to store within the configuration file",
-		type: "string",
-	});
+export const builder: CommandBuilder<AddConfOpts, AddConfOpts> = (yargs) =>
+	yargs
+		.positional("name", {
+			demandOption: true,
+			describe: "A key to store as within the configuration file",
+			type: "string",
+		})
+		.positional("value", {
+			demandOption: true,
+			describe: "The value to store within the configuration file",
+			type: "string",
+		});
 export const command: string = "add <name> <value>";
 export const desc: string = "Add to the configuration";
-export function handler (options: AddConfOpts): void {
+export function handler(options: AddConfOpts): void {
 	const FN = "conf add";
 	log.data(FN, "arguments", options, options);
 

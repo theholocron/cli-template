@@ -7,7 +7,7 @@ if (err) {
 	process.exit(1);
 }
 
-console.log("Complete env")
+console.log("Complete env");
 console.log(data);
 
 const [singleErr, singleData] = env.read("VERBOSE");
@@ -17,5 +17,5 @@ if (singleErr) {
 	process.exit(1);
 }
 
-console.log("Single key env")
+console.log("Single key env");
 console.log(singleData);

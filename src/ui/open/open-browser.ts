@@ -7,7 +7,7 @@ import open, { apps } from "open";
  * @param {string} name - The name of the application.
  * @returns {Promise<void>} - A promise that resolves to a tuple containing an error (if any), a boolean indicating if the app was opened, and the time taken to perform the operation.
  */
-export async function openBrowser (url: string): Promise<void> {
+export async function openBrowser(url: string): Promise<void> {
 	if (!url) {
 		throw new Error("No URL was provided!");
 	}
@@ -20,6 +20,6 @@ export async function openBrowser (url: string): Promise<void> {
 	}
 
 	await open(url, {
-		app: { name: browser }
+		app: { name: browser },
 	});
 }
