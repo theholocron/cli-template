@@ -10,13 +10,13 @@ import { prompt } from "@/ui";
 async function main() {
 	const [, , project] = process.argv;
 
-    try {
-        const filepath = await prompt.search(project, undefined, undefined, {});
-        console.log(filepath);
-    }
+	try {
+		const filepath = await prompt.search(project, undefined, undefined, {});
+		console.log(filepath);
+	}
 	catch (error) {
-        console.error("Error:", error);
-    }
+		console.error("Error:", error);
+	}
 }
 
 main();

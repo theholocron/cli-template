@@ -7,7 +7,7 @@ interface ViewConfOpts extends CLIOptions {
 }
 
 export const builder: CommandBuilder<ViewConfOpts, ViewConfOpts> = (yargs) => yargs
-    .positional("name", {
+	.positional("name", {
 		coerce: str.toArray,
 		describe: "Any key within the configuration file",
 		type: "string",

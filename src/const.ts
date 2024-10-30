@@ -8,12 +8,12 @@ export const __cmddir = (dir: string) => path.resolve(__dirname, dir);
 export const HOME = os.homedir();
 export const OS = process.platform;
 export const SYSTEM_IGNORED_FOLDERS = [
-    "Applications",
-    "Library",
-    "Movies",
-    "Music",
-    "Pictures",
-    "Public",
+	"Applications",
+	"Library",
+	"Movies",
+	"Music",
+	"Pictures",
+	"Public",
 	"Users",
 ] as const;
 export type IgnoredFolders = typeof SYSTEM_IGNORED_FOLDERS[number];

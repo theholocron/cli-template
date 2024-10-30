@@ -18,7 +18,7 @@ export const logger = winston.createLogger({
 		winston.format.printf(({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`)
 	),
 	transports: [
-	    new winston.transports.File({ filename: path.join(LOGS, "error.log"), level: "error" as LogLevel }),
+		new winston.transports.File({ filename: path.join(LOGS, "error.log"), level: "error" as LogLevel }),
 		new winston.transports.File({ filename: path.join(LOGS, "warn.log"), level: "warn" as LogLevel }),
 		new winston.transports.File({ filename: path.join(LOGS, "info.log"), level: "info" as LogLevel }),
 		new winston.transports.File({ filename: path.join(LOGS, "verbose.log"), level: "verbose" as LogLevel }),

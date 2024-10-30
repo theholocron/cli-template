@@ -8,12 +8,12 @@ interface AddConfOpts extends CLIOptions {
 }
 
 export const builder: CommandBuilder<AddConfOpts, AddConfOpts> = (yargs) => yargs
-    .positional("name", {
+	.positional("name", {
 		demandOption: true,
 		describe: "A key to store as within the configuration file",
 		type: "string",
 	})
-    .positional("value", {
+	.positional("value", {
 		demandOption: true,
 		describe: "The value to store within the configuration file",
 		type: "string",
