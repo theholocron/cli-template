@@ -1,35 +1,25 @@
 {
   "name": "@theholocron/cli-template",
+  "version": "1.0.0",
   "description": "<description>",
   "homepage": "https://github.com/theholocron/cli-template#readme",
+  "bugs": "https://github.com/theholocron/cli-template/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theholocron/cli-template.git"
+  },
+  "license": "GPL-3.0",
   "author": "Newton Koumantzelis",
+  "type": "module",
   "main": "src/cli.ts",
   "bin": {
     "cli-template": "./src/cli.ts"
   },
   "man": "./man/cli-template.1",
-  "type": "module",
-  "version": "1.0.0",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/theholocron/cli-template.git"
-  },
-  "bugs": "https://github.com/theholocron/cli-template/issues",
-  "releases": "https://github.com/theholocron/cli-template/releases",
-  "wiki": "https://github.com/theholocron/cli-template/wiki",
-  "license": "GPL-3.0",
-  "packageManager": "npm@9.5.0",
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
-    "postbuild": "marked-man README.md > man/cli-template.1",
     "lint": "docker run -e LOG_LEVEL=DEBUG -e RUN_LOCAL=true -v .:/tmp/lint --rm ghcr.io/super-linter/super-linter:latest",
+    "postbuild": "marked-man README.md > man/cli-template.1",
     "start": "tsx ./src/cli.ts"
-  },
-  "engines": {
-    "node": ">=23",
-    "npm": ">=10"
   },
   "dependencies": {
     "@inquirer/prompts": "^7.0.1",
@@ -43,18 +33,18 @@
     "ora": "^8.1.0",
     "play-sound": "^1.1.6",
     "update-notifier": "^7.3.1",
-    "winston": "^3.15.0",
+    "winston": "^3.16.0",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@theholocron/commitlint-config": "^3.4.4",
-    "@theholocron/eslint-config": "^3.4.4",
-    "@theholocron/jest-config": "^3.4.4",
-    "@theholocron/lint-staged-config": "^3.4.4",
-    "@theholocron/prettier-config": "^3.4.4",
-    "@theholocron/storybook-config": "^3.4.4",
-    "@theholocron/stylelint-config": "^3.4.4",
-    "@theholocron/tsconfig": "^3.4.4",
+    "@theholocron/commitlint-config": "^3.5.1",
+    "@theholocron/eslint-config": "^3.5.1",
+    "@theholocron/jest-config": "^3.5.1",
+    "@theholocron/lint-staged-config": "^3.5.1",
+    "@theholocron/prettier-config": "^3.5.1",
+    "@theholocron/storybook-config": "^3.5.1",
+    "@theholocron/stylelint-config": "^3.5.1",
+    "@theholocron/tsconfig": "^3.5.1",
     "@tsconfig/node-lts": "^20.1.3",
     "@types/conf": "^2.1.0",
     "@types/inquirer": "^9.0.7",
@@ -65,5 +55,15 @@
     "alexjs": "^1.0.0",
     "marked-man": "^2.1.0",
     "tsx": "^4.19.2"
-  }
+  },
+  "packageManager": "npm@9.5.0",
+  "engines": {
+    "node": ">=20",
+    "npm": ">=10"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "releases": "https://github.com/theholocron/cli-template/releases",
+  "wiki": "https://github.com/theholocron/cli-template/wiki"
 }
