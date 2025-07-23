@@ -18,7 +18,7 @@ const readEnv = <T = Record<string, string>>(key?: string): ReadEnvReturn<T> => 
 
 		const parsedData = result.parsed || {};
 
-		if (key && parsedData.hasOwnProperty(key)) {
+		if (key && Object.prototype.hasOwnProperty.call(parsedData, key)) {
 			return [null, parsedData[key] as T];
 		}
 
@@ -33,7 +33,7 @@ const readEnv = <T = Record<string, string>>(key?: string): ReadEnvReturn<T> => 
  */
 const writeEnv = (obj: Record<string, string>): [Error | null, boolean] => {
 	try {
-		const [_, conf] = readEnv();
+		const [, conf] = readEnv();
 
 		const newConf = {
 			...conf,

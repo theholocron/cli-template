@@ -4,7 +4,7 @@ import { config, log } from "@/utils";
 
 interface AddConfOpts extends CLIOptions {
 	name: string;
-	value: any;
+	value: string;
 }
 
 export const builder: CommandBuilder<AddConfOpts, AddConfOpts> = (yargs) =>
