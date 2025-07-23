@@ -7,41 +7,53 @@ type LoggerFunction = (prefix: string, message: string, options?: CLIOptions) =>
 
 const bold = (str: string) => chalk.magenta.bold(str);
 
-const data = (prefix: string, key: string, message: any, options: CLIOptions) => {
-	options?.debug && console.log(chalk.cyan(`[${prefix}]:`), chalk.bgWhiteBright(`${key}:`), message);
+const data = (prefix: string, key: string, message: unknown, options: CLIOptions) => {
+	if (options?.debug) {
+		console.log(chalk.cyan(`[${prefix}]:`), chalk.bgWhiteBright(`${key}:`), message);
+	}
 };
 
 const error: LoggerFunction = (prefix, message, options) => {
 	logger.error(`[${prefix}] error: ${message}`);
 
 	console.log(chalk.red.bold(message));
-	options?.sound && sound.error();
+	if (options?.sound) {
+		sound.error();
+	}
 };
 
 const info: LoggerFunction = (prefix, message, options) => {
 	logger.info(`[${prefix}] info: ${message}`);
 
-	options?.debug && console.log(chalk.cyan(`[${prefix}]:`), message);
+	if (options?.debug) {
+		console.log(chalk.cyan(`[${prefix}]:`), message);
+	}
 };
 
 const processing: LoggerFunction = (prefix, message, options) => {
 	logger.info(`[${prefix}] processing: ${message}`);
 
-	options?.debug && console.log(chalk.magenta(`[${prefix}]:`), message);
+	if (options?.debug) {
+		console.log(chalk.magenta(`[${prefix}]:`), message);
+	}
 };
 
 const success: LoggerFunction = (prefix, message, options) => {
 	logger.info(`[${prefix}] success: ${message}`);
 
 	console.log(chalk.green.bold(message));
-	options?.sound && sound.success();
+	if (options?.sound) {
+		sound.success();
+	}
 };
 
 const warning: LoggerFunction = (prefix, message, options) => {
 	logger.warn(`[${prefix}] warning: ${message}`);
 
 	console.log(chalk.yellow.bold(message));
-	options?.sound && sound.warning();
+	if (options?.sound) {
+		sound.warning();
+	}
 };
 
 export const log = {

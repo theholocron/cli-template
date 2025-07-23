@@ -14,7 +14,7 @@ export const builder: CommandBuilder<ViewConfOpts, ViewConfOpts> = (yargs) =>
 	});
 export const command: string = "view [name..]";
 export const desc: string = "View the configuration";
-export function handler(options: ViewConfOpts): Record<string, any> | Record<string, any>[] {
+export function handler(options: ViewConfOpts): Record<string, string> | Record<string, string>[] {
 	const FN = "conf.view";
 	log.data(FN, "arguments", options, options);
 
@@ -26,7 +26,7 @@ export function handler(options: ViewConfOpts): Record<string, any> | Record<str
 				acc[item] = config.get(item);
 				return acc;
 			},
-			{} as Record<string, any>
+			{} as Record<string, string>
 		);
 
 		console.log(items);

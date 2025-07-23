@@ -75,10 +75,11 @@ export async function handler(options: LogOpts): Promise<void> {
 	lines.forEach(({ number, content }) => {
 		const match = content.match(/(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) (\w+): (.+)/);
 		if (match) {
-			let [, timestamp, level, message] = match;
+			const [, timestamp, level, rawMessage] = match;
 
 			// Apply magenta style to bracketed content
-			message = message.replace(/\[([^\]]+)\]/g, (match, p1) => `${bracketStyle(`[${p1}]`)}`);
+			const message = rawMessage.replace(/\[([^\]]+)\]/g, (_, p1) => `${bracketStyle(`[${p1}]`)}`);
+
 			console.log(
 				`${chalk.gray(number)}: ${timestampStyle(`[${timestamp}]`)} ${levelStyle(level)}: ${messageStyle(message)}`
 			);
