@@ -2,25 +2,17 @@
 # Source:  theholocron/holocron · packages/cli/src/commands/setup-workflows.ts
 # Tool:    holocron setup
 # Changes: run `holocron setup` to regenerate.
-name: Lint
+name: Audit
 
 on: # yamllint disable-line rule:truthy
   push:
     branches: [main, alpha]
   pull_request:
 
-concurrency:
-  group: lint-${{ github.ref }}
-  cancel-in-progress: true
-
 permissions:
-  contents: write
-  statuses: write
+  contents: read
 
 jobs:
-  lint:
-    name: Lint
-    uses: theholocron/.github/.github/workflows/lint.yml@main
+  audit:
+    uses: theholocron/.github/.github/workflows/audit.yml@main
     secrets: inherit
-    with:
-      enable-auto-commit: true
