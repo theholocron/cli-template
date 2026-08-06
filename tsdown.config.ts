@@ -1,1 +1,10 @@
-export { default } from "@theholocron/tsdown-config/presets/library";
+import { defineConfig } from "tsdown";
+
+export default defineConfig({
+	entry: ["src/cli.ts"],
+	format: "esm",
+	dts: false,
+	clean: true,
+	sourcemap: true,
+	banner: { js: "#!/usr/bin/env node" },
+});
