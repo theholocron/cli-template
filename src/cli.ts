@@ -1,13 +1,12 @@
-#!/usr/bin/env npx tsx
-
 import updateNotifier from "update-notifier";
 import { hideBin } from "yargs/helpers";
 import yargs from "yargs/yargs";
+
 import { __cmddir } from "@/const";
 import pkg from "@/package";
 import * as utils from "@/utils";
 
-const [, env] = utils.env.read();
+const { parser } = utils.env;
 
 export interface CLIOptions {
 	d?: boolean;
@@ -31,7 +30,7 @@ yargs(hideBin(process.argv))
 	.options({
 		d: {
 			alias: ["debug"],
-			default: utils.config.get("preferences.debug") || utils.str.toBoolean(env?.CLI_TEMPLATE_DEBUG) || false,
+			default: utils.config.get("preferences.debug") || Boolean(parser.get("debug")) || false,
 			describe: "Turn on debugging mode",
 			type: "boolean",
 			global: true,
@@ -39,14 +38,14 @@ yargs(hideBin(process.argv))
 		},
 		s: {
 			alias: ["sound"],
-			default: utils.config.get("preferences.sound") || utils.str.toBoolean(env?.CLI_TEMPLATE_SOUND) || false,
+			default: utils.config.get("preferences.sound") || Boolean(parser.get("sound")) || false,
 			describe: "Turn on sound effects",
 			type: "boolean",
 			global: true,
 			hidden: true,
 		},
 		verbose: {
-			default: utils.str.toBoolean(env?.CLI_TEMPLATE_VERBOSE) || false,
+			default: Boolean(parser.get("verbose")) || false,
 			describe: "Turn on logging",
 			type: "boolean",
 			global: true,

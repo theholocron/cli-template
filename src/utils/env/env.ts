@@ -1,47 +1,39 @@
 import fs from "node:fs";
-import dotenv from "dotenv";
+
+import { createEnvParser, type EnvParser } from "@theholocron/env-utils";
+
+// The namespace(s) this CLI uses for its env vars.
+// Must match the `env.namespaces` array in holocron.config.ts so that
+// tooling and runtime stay in sync.
+// Add org-wide prefixes before the project-specific one:
+//   ["HOLOCRON", "CLI_TEMPLATE"]  →  HOLOCRON_* as defaults, CLI_TEMPLATE_* overrides
+const NAMESPACES = ["CLI_TEMPLATE"] as const;
+
+export const parser: EnvParser = createEnvParser({
+	appName: "cli-template",
+	namespaces: [...NAMESPACES],
+});
 
 const ENV_CONF = `${process.cwd()}/.env`;
 
 /**
- * Reads environment variables from the .env file.
+ * Writes env vars back to the .env file (used by `conf` commands).
+ * Reads the current file first and merges so existing vars are preserved.
  */
-type ReadEnvReturn<T> = [Error | null, T];
-
-const readEnv = <T = Record<string, string>>(key?: string): ReadEnvReturn<T> => {
+export const writeEnv = (obj: Record<string, string>): [Error | null, boolean] => {
 	try {
-		const result = dotenv.config();
-
-		if (result.error) {
-			return [result.error, {} as T];
+		const existing: Record<string, string> = {};
+		if (fs.existsSync(ENV_CONF)) {
+			const lines = fs.readFileSync(ENV_CONF, "utf8").split("\n");
+			for (const line of lines) {
+				const eq = line.indexOf("=");
+				if (eq > 0) existing[line.slice(0, eq)] = line.slice(eq + 1);
+			}
 		}
 
-		const parsedData = result.parsed || {};
-
-		if (key && Object.prototype.hasOwnProperty.call(parsedData, key)) {
-			return [null, parsedData[key] as T];
-		}
-
-		return [null, parsedData as T];
-	} catch (error) {
-		return [error as Error, {} as T];
-	}
-};
-
-/**
- * Writes environment variables to the .env file.
- */
-const writeEnv = (obj: Record<string, string>): [Error | null, boolean] => {
-	try {
-		const [, conf] = readEnv();
-
-		const newConf = {
-			...conf,
-			...obj,
-		};
-
-		const content = Object.entries(newConf)
-			.map(([key, value]) => `${key}=${value}`)
+		const merged = { ...existing, ...obj };
+		const content = Object.entries(merged)
+			.map(([k, v]) => `${k}=${v}`)
 			.join("\n");
 
 		fs.writeFileSync(ENV_CONF, content, { flag: "w+" });
@@ -52,6 +44,6 @@ const writeEnv = (obj: Record<string, string>): [Error | null, boolean] => {
 };
 
 export const env = {
-	read: readEnv,
+	parser,
 	write: writeEnv,
 };

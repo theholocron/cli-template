@@ -37,4 +37,10 @@ export default defineConfig({
 	docs: { build: "workflow", https: true },
 	agent: "claude",
 	skills: ["git-safety", "pr-workflow", "commit-standards", "security-review"],
+	env: {
+		// Replace CLI_TEMPLATE with your project's namespace throughout.
+		// Add org-wide prefixes before it so they act as global defaults:
+		//   namespaces: ["HOLOCRON", "MY_CLI"]
+		namespaces: ["CLI_TEMPLATE"],
+	},
 } satisfies HolocronConfig);
