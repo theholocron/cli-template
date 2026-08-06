@@ -82,6 +82,9 @@ Desktop.ini
 node_modules
 .turbo
 
+# Environment
+.env
+
 # Locally Built Stuff
 coverage
 reports

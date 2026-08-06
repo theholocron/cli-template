@@ -15,16 +15,18 @@ export default defineConfig({
 		protection: "balanced",
 		properties: {
 			...repo.properties,
+			runtime_environment: "node",
 			open_source: true,
 			uses_external_packages: false,
 		},
 	},
 	workflows: [
 		...workflows,
+		"audit",
 		{ name: "release", with: { "run-build": true } },
 		{
 			name: "deploy-docs",
-			with: { name: "cli-template" },
+			with: { name: "cli-template", "use-turbo": false },
 			paths: ["docs/**"],
 		},
 	],
@@ -32,6 +34,7 @@ export default defineConfig({
 		...providers,
 		secrets: "github",
 	},
+	docs: { build: "workflow", https: true },
 	agent: "claude",
 	skills: ["git-safety", "pr-workflow", "commit-standards", "security-review"],
 } satisfies HolocronConfig);
