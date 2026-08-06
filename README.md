@@ -25,7 +25,6 @@ This will:
 3. Run `pnpm install`
 4. Run `holocron setup` to configure branch protection, labels, workflows, and repo settings
 
-
 ## Installation
 
 ```bash
