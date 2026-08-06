@@ -1,6 +1,6 @@
 # CLI Template
 
-A NodeJS command-line interface template used within the Galaxy.
+A modern CLI template with pre-configured tools, best practices, and CI/CD setup for rapid project development.
 
 ## Installation
 

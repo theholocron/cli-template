@@ -4,7 +4,8 @@ import { node } from "@theholocron/holocron-config";
 
 const { repo, workflows, providers } = node();
 export default defineConfig({
-	description: "Node.js CLI starter template for @theholocron repos.",
+	description:
+		"A modern CLI template with pre-configured tools, best practices, and CI/CD setup for rapid project development.",
 	homepage: "https://docs.theholocron.dev/cli-template/",
 	repo: {
 		name: "theholocron/cli-template",
