@@ -6,24 +6,7 @@ A modern CLI template with pre-configured tools, best practices, and CI/CD setup
 
 <!-- /holocron:description -->
 
-## Getting Started
-
-Use the [Holocron CLI](https://github.com/theholocron/holocron) to scaffold a new CLI project. It clones the template, renames all placeholder references, wires up your vault provider, and runs `holocron setup` in one step:
-
-```bash
-npx @theholocron/cli new cli my-cli \
-  --description "My CLI description" \
-  --homepage "https://my-cli.example.com" \
-  --vault doppler \
-  --agent claude
-```
-
-This will:
-
-1. Create `theholocron/my-cli` from this template on GitHub
-2. Replace all `cli-template` references with `my-cli` throughout the repo
-3. Run `pnpm install`
-4. Run `holocron setup` to configure branch protection, labels, workflows, and repo settings
+<!-- holocron:installation -->
 
 ## Installation
 
@@ -46,6 +29,8 @@ cli-template log --debug
 cli-template log --sound
 ```
 
+<!-- /holocron:installation -->
+
 ## Environment Variables
 
 Copy `.env.example` to `.env` and configure as needed. The `CLI_TEMPLATE` prefix is this project's namespace — replace it with your own (e.g. `HOLOCRON`, `RANDO`) when building on this template so each CLI's env vars stay isolated.
@@ -58,11 +43,9 @@ Copy `.env.example` to `.env` and configure as needed. The `CLI_TEMPLATE` prefix
 
 ## Development
 
-This repo uses [pnpm workspaces](https://pnpm.io/workspaces).
-
 ```bash
-pnpm dev         # run via tsx (no build needed)
 pnpm build         # compile src/ → dist/
+pnpm start         # run via tsx (no build needed)
 pnpm test          # run tests
 pnpm test:coverage # run tests with coverage
 pnpm typecheck     # type-check without emitting
@@ -78,7 +61,7 @@ pnpm lint          # run super-linter locally (requires Docker)
 | **Config**        | [Conf](https://github.com/sindresorhus/conf)                                                              | Persistent user preferences with JSON-schema validation                 |
 | **Logging**       | [Winston](https://github.com/winstonjs/winston)                                                           | Structured file logging across error, warn, info, verbose, debug levels |
 | **Terminal UI**   | [Chalk](https://github.com/chalk/chalk) + [Ora](https://github.com/sindresorhus/ora)                      | Colour output and spinners for long-running tasks                       |
-| **Environment**   | [dotenv](https://github.com/motdotla/dotenv)                                                              | `.env` file support with a configurable namespace prefix                |
+| **Environment**   | [@theholocron/env-utils](https://github.com/theholocron/utils)                                            | Namespace-scoped env var parsing with cascade priority                  |
 | **Updates**       | [update-notifier](https://github.com/yeoman/update-notifier)                                              | Prompts users to upgrade when a new version is published                |
 | **Open**          | [open](https://github.com/sindresorhus/open) + [open-editor](https://github.com/sindresorhus/open-editor) | Launch URLs and files in the default browser or editor                  |
 | **Build**         | [tsdown](https://tsdown.dev/)                                                                             | Compiles `src/cli.ts` → `dist/cli.mjs` with a Node.js shebang           |
@@ -87,3 +70,7 @@ pnpm lint          # run super-linter locally (requires Docker)
 ## Releases
 
 Releases are automated via [semantic-release](https://semantic-release.gitbook.io) on push to `main`. See [CHANGELOG.md](CHANGELOG.md) for the release history.
+
+## Documentation
+
+Check out [The Holocron Archive](https://docs.theholocron.dev/cli-template/) for more information.

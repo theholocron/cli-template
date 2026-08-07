@@ -23,3 +23,5 @@ jobs:
     name: Test
     uses: theholocron/.github/.github/workflows/test.yml@main
     secrets: inherit
+    with:
+      run-unit: true
