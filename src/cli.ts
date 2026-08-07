@@ -21,7 +21,7 @@ export interface CLIOptions {
 }
 
 process.on("unhandledRejection", (err) => {
-	console.error(err instanceof CLIError ? utils.style.fail(err.message) : err);
+	utils.log.error("cli", err instanceof CLIError ? err.message : String(err));
 	process.exitCode = 1;
 });
 

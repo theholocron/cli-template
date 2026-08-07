@@ -2,7 +2,7 @@ import type { CommandBuilder } from "yargs";
 
 import { type CLIOptions } from "@/cli";
 import { CLIError } from "@/errors";
-import { config, style } from "@/utils";
+import { config, log } from "@/utils";
 
 // ── Input / Report ──────────────────────────────────────────────────────
 
@@ -34,7 +34,7 @@ export function runConfAdd(input: RunConfAddInput): ConfAddReport {
 	}
 
 	const updated = config.get(name);
-	print(style.success(`Set ${name} = ${String(updated)}`));
+	print(`Set ${name} = ${String(updated)}`);
 	return { status: "ok", key: name, value: updated };
 }
 
@@ -61,11 +61,13 @@ export const command: string = "add <name> <value>";
 export const desc: string = "Add to the configuration";
 
 export function handler(options: AddConfOpts): void {
+	const FN = "conf add";
+	log.data(FN, "arguments", options, options);
 	try {
-		const report = runConfAdd({ name: options.name, value: options.value });
+		const report = runConfAdd({ name: options.name, value: options.value, print: (msg) => log.success(FN, msg) });
 		if (report.status === "fail") process.exitCode = 1;
 	} catch (err) {
-		console.error(err instanceof CLIError ? style.fail(err.message) : err);
+		log.error(FN, err instanceof CLIError ? err.message : String(err));
 		process.exitCode = 1;
 	}
 }

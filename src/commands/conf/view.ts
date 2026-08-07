@@ -2,7 +2,7 @@ import type { CommandBuilder } from "yargs";
 
 import { type CLIOptions } from "@/cli";
 import { CLIError } from "@/errors";
-import { config, str, style } from "@/utils";
+import { config, log, str } from "@/utils";
 
 // ── Input / Report ──────────────────────────────────────────────────────
 
@@ -54,11 +54,13 @@ export const command: string = "view [name..]";
 export const desc: string = "View the configuration";
 
 export function handler(options: ViewConfOpts): void {
+	const FN = "conf view";
+	log.data(FN, "arguments", options, options);
 	try {
 		const report = runConfView({ name: options.name });
 		if (report.status === "fail") process.exitCode = 1;
 	} catch (err) {
-		console.error(err instanceof CLIError ? style.fail(err.message) : err);
+		log.error(FN, err instanceof CLIError ? err.message : String(err));
 		process.exitCode = 1;
 	}
 }
