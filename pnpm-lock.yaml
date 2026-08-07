@@ -15,8 +15,8 @@ importers:
         specifier: ^7.10.1
         version: 7.10.1(@types/node@26.1.2)
       '@theholocron/env-utils':
-        specifier: ^1.2.0
-        version: 1.2.0(dotenv@17.4.2)
+        specifier: ^1.2.1
+        version: 1.2.1(dotenv@17.4.2)
       chalk:
         specifier: ^5.6.2
         version: 5.6.2
@@ -2144,8 +2144,8 @@ packages:
       '@astrojs/starlight': '>=0.30.0'
       astro: '>=5.0.0'
 
-  '@theholocron/env-utils@1.2.0':
-    resolution: {integrity: sha512-a5iOPP7u1DynvUpytWjkpyHSdol7SOJYBmvPi/qFpQ1mANMgHY7QjnvDI8CKO7IFpLYo5LPCT3WQ+QfcHQBERw==}
+  '@theholocron/env-utils@1.2.1':
+    resolution: {integrity: sha512-07wjBPf+Z/fplZm+9uDH7g5z6Dtx01vRO3Ft59Ztq3rUy04HOQ6+XRN0V+hT9BSDwvxrIgUQm5jmahf8ROoYMA==}
     engines: {node: '>=22', pnpm: '>=10'}
     peerDependencies:
       dotenv: '>=16'
@@ -8671,7 +8671,7 @@ snapshots:
       astro: 7.1.6(@astrojs/markdown-remark@7.2.2)(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@26.1.2)(jiti@2.7.0)(rollup@4.62.4)(tsx@4.23.9)(yaml@2.9.0)
       gray-matter: 4.0.3
 
-  '@theholocron/env-utils@1.2.0(dotenv@17.4.2)':
+  '@theholocron/env-utils@1.2.1(dotenv@17.4.2)':
     dependencies:
       dotenv: 17.4.2
 

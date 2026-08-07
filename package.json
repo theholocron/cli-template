@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@inquirer/prompts": "^7.10.1",
-    "@theholocron/env-utils": "^1.2.0",
+    "@theholocron/env-utils": "^1.2.1",
     "chalk": "^5.6.2",
     "conf": "^13.1.0",
     "default-browser": "^5.5.0",
