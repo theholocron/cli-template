@@ -66,7 +66,7 @@ Copy `.env.example` to `.env` and configure as needed. The `CLI_TEMPLATE` prefix
 
 ```bash
 pnpm build         # compile src/ → dist/
-pnpm start         # run via tsx (no build needed)
+pnpm dev         # run via tsx (no build needed)
 pnpm test          # run tests
 pnpm test:coverage # run tests with coverage
 pnpm typecheck     # type-check without emitting
@@ -91,7 +91,3 @@ pnpm lint          # run super-linter locally (requires Docker)
 ## Releases
 
 Releases are automated via [semantic-release](https://semantic-release.gitbook.io) on push to `main`. See [CHANGELOG.md](CHANGELOG.md) for the release history.
-
-## Documentation
-
-Check out [The Holocron Archive](https://docs.theholocron.dev/cli-template/) for more information.
