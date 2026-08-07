@@ -1,8 +1,8 @@
 {
   "name": "@theholocron/cli-template",
   "version": "1.1.0",
-  "description": "<description>",
-  "homepage": "https://github.com/theholocron/cli-template#readme",
+  "description": "A modern CLI template with pre-configured tools, best practices, and CI/CD setup for rapid project development.",
+  "homepage": "https://docs.theholocron.dev/cli-template/",
   "bugs": "https://github.com/theholocron/cli-template/issues",
   "repository": {
     "type": "git",
@@ -11,70 +11,90 @@
   "license": "GPL-3.0",
   "author": "Newton Koumantzelis",
   "type": "module",
-  "main": "src/cli.ts",
+  "main": "./dist/cli.mjs",
   "bin": {
-    "cli-template": "./src/cli.ts"
+    "cli-template": "./dist/cli.mjs"
   },
   "man": "./man/cli-template.1",
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
+    "build": "tsdown",
+    "postbuild": "mkdir -p man && marked-man README.md > man/cli-template.1",
+    "dev": "tsx ./src/cli.ts",
     "lint": "docker run -rm -e RUN_LOCAL=true -v .:/tmp/lint github/super-linter",
-    "postbuild": "marked-man README.md > man/cli-template.1",
     "prepare": "husky",
-    "start": "tsx ./src/cli.ts",
+    "release": "semantic-release",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@inquirer/prompts": "^7.0.1",
-    "chalk": "^5.3.0",
-    "conf": "^13.0.1",
-    "default-browser": "^5.2.1",
-    "dotenv": "^17.2.0",
-    "inquirer-autocomplete-standalone": "^0.8.1",
-    "open": "^10.1.0",
-    "open-editor": "^4.1.1",
-    "ora": "^8.1.0",
-    "play-sound": "^1.1.6",
+    "@inquirer/prompts": "^7.10.1",
+    "@theholocron/env-utils": "^1.2.1",
+    "chalk": "^5.6.2",
+    "conf": "^13.1.0",
+    "ora": "^8.2.0",
     "update-notifier": "^7.3.1",
-    "winston": "^3.16.0",
-    "yargs": "^17.7.2"
+    "winston": "^3.19.0",
+    "yargs": "^17.7.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
-    "@eslint/compat": "^1.3.1",
-    "@eslint/js": "^9.32.0",
-    "@testing-library/jest-dom": "^6.6.4",
-    "@theholocron/commitlint-config": "^4.1.0",
-    "@theholocron/eslint-config": "^4.1.0",
-    "@theholocron/lint-staged-config": "^4.1.0",
-    "@theholocron/prettier-config": "^4.1.0",
-    "@tsconfig/node-lts": "^22.0.2",
-    "@types/conf": "^2.1.0",
-    "@types/inquirer": "^9.0.7",
-    "@types/play-sound": "^1.1.2",
+    "@eslint/js": "^10.0.1",
+    "@semantic-release/changelog": "^7.0.0",
+    "@semantic-release/exec": "^7.1.0",
+    "@semantic-release/git": "^11.0.1",
+    "@semantic-release/github": "^12.0.9",
+    "@theholocron/cli": "^3.16.0",
+    "@theholocron/commitlint-config": "^7.15.0",
+    "@theholocron/eslint-config": "^7.15.0",
+    "@theholocron/holocron-config": "^7.15.0",
+    "@theholocron/holocron-plugin-github": "^3.16.0",
+    "@theholocron/lint-staged-config": "^7.15.0",
+    "@theholocron/prettier-config": "^7.15.0",
+    "@theholocron/semantic-release-config": "^7.15.0",
+    "@theholocron/skills": "^1.3.2",
+    "@theholocron/tsconfig": "^7.15.0",
+    "@theholocron/tsdown-config": "^7.15.0",
+    "@theholocron/vitest-config": "^7.15.0",
     "@types/update-notifier": "^6.0.8",
-    "@types/winston": "^2.4.4",
-    "@types/yargs": "^17.0.33",
+    "@types/yargs": "^17.0.35",
+    "@vitest/coverage-v8": "^4.1.10",
+    "@vitest/eslint-plugin": "^1.6.26",
     "alex": "^11.0.1",
-    "eslint": "^9.32.0",
-    "globals": "^16.3.0",
+    "conventional-changelog-conventionalcommits": "^10.2.1",
+    "eslint": "^10.8.0",
+    "eslint-plugin-n": "^18.2.2",
+    "eslint-plugin-simple-import-sort": "^14.0.0",
+    "globals": "^17.9.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.1.2",
-    "marked-man": "^2.1.0",
-    "prettier": "^3.6.2",
-    "sort-package-json": "^3.4.0",
-    "tsc-files": "^1.1.4",
-    "tsx": "^4.19.2",
+    "knip": "^6.32.0",
+    "lint-staged": "^17.3.0",
+    "marked-man": "^2.1.1",
+    "prettier": "^3.9.6",
+    "semantic-release": "^25.0.9",
+    "sort-package-json": "^4.0.0",
+    "tsdown": "^0.22.14",
+    "tsx": "^4.23.9",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.38.0"
+    "typescript-eslint": "^8.66.0",
+    "vitest": "^4.1.10"
   },
-  "packageManager": "npm@9.5.0",
+  "packageManager": "pnpm@10.33.0",
   "engines": {
-    "node": ">=22",
-    "npm": ">=10"
+    "node": ">=22"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ],
+    "overrides": {
+      "conventional-changelog-conventionalcommits": "9.3.1"
+    }
   },
   "releases": "https://github.com/theholocron/cli-template/releases",
   "wiki": "https://github.com/theholocron/cli-template/wiki"

@@ -1,9 +1,9 @@
-import { log } from "@/utils";
+import { log, style } from "@/utils";
 
 const FN = "func";
 const options = { debug: true };
 
-console.log(log.style.bold("this message is bold"));
+console.log(style.header("this message is bold"));
 
 log.data(FN, "key", { test: "value" }, options);
 log.error(FN, "This is an error message", options);

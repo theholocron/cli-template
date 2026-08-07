@@ -82,8 +82,21 @@ Desktop.ini
 node_modules
 .turbo
 
+# Environment
+.env
+
 # Locally Built Stuff
+man/
+test-report.junit.xml
 coverage
 reports
 dist
 super-linter-output
+
+# managed by holocron setup — skills
+/.agents/skills/
+/.claude/skills/git-safety
+/.claude/skills/pr-workflow
+/.claude/skills/commit-standards
+/.claude/skills/security-review
+# end managed by holocron setup — skills

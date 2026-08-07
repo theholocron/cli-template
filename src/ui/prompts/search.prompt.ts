@@ -1,22 +1,14 @@
-import autocomplete from "inquirer-autocomplete-standalone";
-// import { type CLIOptions } from "@/cli";
+import { search } from "@inquirer/prompts";
+
 import { type Choice } from "./types";
 
-export async function searchPrompt(
-	source: Choice<string>[],
-	message?: string /* options?: CLIOptions */
-): Promise<string> {
-	return await autocomplete({
-		emptyText: "No results found. Please enter a term",
-		message: message || "Search a term",
-		source: async (input?: string) =>
+export async function searchPrompt(source: Choice<string>[], message?: string): Promise<string> {
+	return await search({
+		message: message ?? "Search a term",
+		source: async (input) =>
 			source.filter(({ name }) => {
 				const proj = name?.toLowerCase() ?? "";
-				if (proj.length > 0) {
-					return proj.includes(input?.toLowerCase() ?? "");
-				}
-
-				return "";
+				return proj.length > 0 && proj.includes((input ?? "").toLowerCase());
 			}),
 	});
 }

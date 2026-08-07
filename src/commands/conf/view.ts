@@ -1,6 +1,44 @@
 import type { CommandBuilder } from "yargs";
-import { CLIOptions } from "@/cli";
+
+import { type CLIOptions } from "@/cli";
+import { CLIError } from "@/errors";
 import { config, log, str } from "@/utils";
+
+// ── Input / Report ──────────────────────────────────────────────────────
+
+export interface RunConfViewInput {
+	name?: string[];
+	print?: (value: unknown) => void;
+}
+
+export interface ConfViewReport {
+	status: "ok" | "fail";
+	value: Record<string, unknown> | Record<string, unknown>[];
+}
+
+// ── Business logic (injectable, testable) ───────────────────────────────
+
+export function runConfView(input: RunConfViewInput): ConfViewReport {
+	const { name, print = console.log } = input;
+
+	if (name && name.length > 0) {
+		const items = name.reduce(
+			(acc, key) => {
+				acc[key] = config.get(key) as unknown;
+				return acc;
+			},
+			{} as Record<string, unknown>
+		);
+		print(items);
+		return { status: "ok", value: items };
+	}
+
+	const all = config.store as unknown as Record<string, unknown>;
+	print(all);
+	return { status: "ok", value: all };
+}
+
+// ── Yargs wiring ────────────────────────────────────────────────────────
 
 interface ViewConfOpts extends CLIOptions {
 	name?: string[];
@@ -14,27 +52,15 @@ export const builder: CommandBuilder<ViewConfOpts, ViewConfOpts> = (yargs) =>
 	});
 export const command: string = "view [name..]";
 export const desc: string = "View the configuration";
-export function handler(options: ViewConfOpts): Record<string, string> | Record<string, string>[] {
-	const FN = "conf.view";
+
+export function handler(options: ViewConfOpts): void {
+	const FN = "conf view";
 	log.data(FN, "arguments", options, options);
-
-	const { name } = options;
-
-	if (name && name.length > 0) {
-		const items = name.reduce(
-			(acc, item) => {
-				acc[item] = config.get(item);
-				return acc;
-			},
-			{} as Record<string, string>
-		);
-
-		console.log(items);
-		return items;
+	try {
+		const report = runConfView({ name: options.name });
+		if (report.status === "fail") process.exitCode = 1;
+	} catch (err) {
+		log.error(FN, err instanceof CLIError ? err.message : String(err));
+		process.exitCode = 1;
 	}
-
-	const allConfig = config.get();
-	const obj = { ...allConfig };
-	console.log(obj);
-	return obj;
 }

@@ -1,61 +1,56 @@
-#!/usr/bin/env npx tsx
-
 import updateNotifier from "update-notifier";
+import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import yargs from "yargs/yargs";
+
 import { __cmddir } from "@/const";
-import pkg from "@/package";
+import { CLIError } from "@/errors";
 import * as utils from "@/utils";
 
-const [, env] = utils.env.read();
+import pkg from "../package.json" with { type: "json" };
+
+const { parser } = utils.env;
+
+// The yargs .env() prefix must match the last (most-specific) namespace.
+// Update this if NAMESPACES in src/utils/env/env.ts changes.
+const ENV_PREFIX = "CLI_TEMPLATE";
 
 export interface CLIOptions {
 	d?: boolean;
 	debug?: boolean;
-	s?: boolean;
-	sound?: boolean;
 	verbose?: boolean;
-	// spinner: Ora;
 }
+
+process.on("unhandledRejection", (err) => {
+	utils.log.error("cli", err instanceof CLIError ? err.message : String(err));
+	process.exitCode = 1;
+});
 
 // eslint-disable-next-line @typescript-eslint/no-unused-expressions
 yargs(hideBin(process.argv))
+	.scriptName("cli-template")
 	.usage("Usage: $0 <command> [options]")
-	.commandDir(__cmddir("./commands"), {
-		extensions: ["ts"],
-	})
+	.commandDir(__cmddir("./commands"), { extensions: ["js", "ts"] })
 	.demandCommand()
-	.env("CLI_TEMPLATE")
+	.env(ENV_PREFIX)
 	.completion()
 	.recommendCommands()
 	.options({
 		d: {
 			alias: ["debug"],
-			default: utils.config.get("preferences.debug") || utils.str.toBoolean(env?.CLI_TEMPLATE_DEBUG) || false,
+			default: Boolean(utils.config.get("preferences.debug")) || Boolean(parser.get("debug")) || false,
 			describe: "Turn on debugging mode",
 			type: "boolean",
 			global: true,
 			hidden: true,
 		},
-		s: {
-			alias: ["sound"],
-			default: utils.config.get("preferences.sound") || utils.str.toBoolean(env?.CLI_TEMPLATE_SOUND) || false,
-			describe: "Turn on sound effects",
-			type: "boolean",
-			global: true,
-			hidden: true,
-		},
 		verbose: {
-			default: utils.str.toBoolean(env?.CLI_TEMPLATE_VERBOSE) || false,
-			describe: "Turn on logging",
+			default: Boolean(parser.get("verbose")) || false,
+			describe: "Turn on verbose logging",
 			type: "boolean",
 			global: true,
 		},
 	})
-	.alias({
-		h: "help",
-		v: "version",
-	})
+	.alias({ h: "help", v: "version" })
 	.strict()
 	.help("h")
 	.version()

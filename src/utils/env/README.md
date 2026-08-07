@@ -1,52 +1,47 @@
 # Environment Variables
 
-A wrapper around [`dotenv`](https://github.com/motdotla/dotenv) that provides a configuration file for storing environment variables.
+A wrapper around [`@theholocron/env-utils`](https://github.com/theholocron/utils) that provides namespace-scoped environment variable parsing with cascade priority.
 
-The configuration will pull from a `.env` file within the repository and place all of that data onto the `process.env` for instant access.
+The parser reads from `process.env` (populated by the shell or a `.env` file loaded upstream) and resolves values under the `CLI_TEMPLATE_*` namespace.
 
 ## Usage
 
 ```javascript
 import { env } from "@/utils";
 
-// grab every value within the configuration file
-const [readErr, readData] = env.read();
+// read a value (falls back through namespace cascade)
+const debug = env.parser.get("debug");
 
-// grab a specific variable
-const [readAllErr, readAllData] = env.read("SOME_ENV_VAR");
-
-// set a specific variable
-const [writeErr, writeData] = env.write({ mockKey: "mockValue" });
+// write vars back to the .env file
+const [err, ok] = env.write({ CLI_TEMPLATE_DEBUG: "true" });
 ```
 
-### When to use `env` methods or `process.env`
+### When to use `env.parser` or `process.env`
 
-#### Use `process.env` for accessing environment variables
+#### Use `process.env` for direct access
 
-The point of `dotenv` is to allow you to put environment variables within a file in order to have them show up on `process.env`.  So if you need access to any environment variable, rather than running it on the command-line, you can add it to the `.env` and it will be present.
+When you need a raw env var and have no namespace or cascade requirements, `process.env.SOME_VAR` is fine.
 
-#### Use `env.read()` for interfacing with the configuration file
+#### Use `env.parser.get()` for namespaced access
 
-Whenever you want the application to read the configuration file or values on it, then use `env.read()`. Common use cases would be to read the configuration before changing it, or reading the values to use it for setting something else such as a file name.
+`env.parser` resolves values through the `CLI_TEMPLATE_*` namespace cascade, so it handles prefix stripping, type coercion, and default values automatically.
 
-#### Use `env.write()` for writing to or updating the configuration file
+#### Use `env.write()` for persisting to `.env`
 
-Whenever you want the application to change the configuration file or values on it, then use `env.write()`.  This will set permanent changes to the configuration file.
+Reads the current `.env` file, merges the new values, and writes it back. Existing vars not in the update are preserved.
 
 ## API
 
-### `.read(key?: string)`
+### `env.parser`
 
-Returns the value of the key specified or the entire environment variables object if no key is present.
+An `EnvParser` instance from `@theholocron/env-utils` scoped to the `CLI_TEMPLATE` namespace.
 
-#### key
+### `env.write(obj)`
 
-Type: `string`
-
-### `.write(obj: Record<string, string>)`
-
-Returns `true` if writing to the environment variables file was successful, or `false` if there was an error.
+Merges `obj` into the `.env` file at `process.cwd()/.env` and writes it back.
 
 #### obj
 
 Type: `Record<string, string>`
+
+Returns: `[Error | null, boolean]`
