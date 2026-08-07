@@ -87,6 +87,7 @@ node_modules
 
 # Locally Built Stuff
 man/
+test-report.junit.xml
 coverage
 reports
 dist

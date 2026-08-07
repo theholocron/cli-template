@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "build": "tsdown",
-    "postbuild": "marked-man README.md > man/cli-template.1",
+    "postbuild": "mkdir -p man && marked-man README.md > man/cli-template.1",
     "lint": "docker run -rm -e RUN_LOCAL=true -v .:/tmp/lint github/super-linter",
     "prepare": "husky",
     "release": "semantic-release",
