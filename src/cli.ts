@@ -3,6 +3,7 @@ import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 
 import { __cmddir } from "@/const";
+import { CLIError } from "@/errors";
 import * as utils from "@/utils";
 
 import pkg from "../package.json" with { type: "json" };
@@ -16,10 +17,13 @@ const ENV_PREFIX = "CLI_TEMPLATE";
 export interface CLIOptions {
 	d?: boolean;
 	debug?: boolean;
-	s?: boolean;
-	sound?: boolean;
 	verbose?: boolean;
 }
+
+process.on("unhandledRejection", (err) => {
+	console.error(err instanceof CLIError ? utils.style.fail(err.message) : err);
+	process.exitCode = 1;
+});
 
 // eslint-disable-next-line @typescript-eslint/no-unused-expressions
 yargs(hideBin(process.argv))
@@ -35,14 +39,6 @@ yargs(hideBin(process.argv))
 			alias: ["debug"],
 			default: Boolean(utils.config.get("preferences.debug")) || Boolean(parser.get("debug")) || false,
 			describe: "Turn on debugging mode",
-			type: "boolean",
-			global: true,
-			hidden: true,
-		},
-		s: {
-			alias: ["sound"],
-			default: Boolean(utils.config.get("preferences.sound")) || Boolean(parser.get("sound")) || false,
-			describe: "Turn on sound effects",
 			type: "boolean",
 			global: true,
 			hidden: true,

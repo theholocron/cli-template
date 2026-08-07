@@ -1,7 +1,44 @@
 import type { CommandBuilder } from "yargs";
 
-import { CLIOptions } from "@/cli";
-import { config, log, str } from "@/utils";
+import { type CLIOptions } from "@/cli";
+import { CLIError } from "@/errors";
+import { config, str, style } from "@/utils";
+
+// ── Input / Report ──────────────────────────────────────────────────────
+
+export interface RunConfViewInput {
+	name?: string[];
+	print?: (value: unknown) => void;
+}
+
+export interface ConfViewReport {
+	status: "ok" | "fail";
+	value: Record<string, unknown> | Record<string, unknown>[];
+}
+
+// ── Business logic (injectable, testable) ───────────────────────────────
+
+export function runConfView(input: RunConfViewInput): ConfViewReport {
+	const { name, print = console.log } = input;
+
+	if (name && name.length > 0) {
+		const items = name.reduce(
+			(acc, key) => {
+				acc[key] = config.get(key) as unknown;
+				return acc;
+			},
+			{} as Record<string, unknown>
+		);
+		print(items);
+		return { status: "ok", value: items };
+	}
+
+	const all = config.store as unknown as Record<string, unknown>;
+	print(all);
+	return { status: "ok", value: all };
+}
+
+// ── Yargs wiring ────────────────────────────────────────────────────────
 
 interface ViewConfOpts extends CLIOptions {
 	name?: string[];
@@ -15,26 +52,13 @@ export const builder: CommandBuilder<ViewConfOpts, ViewConfOpts> = (yargs) =>
 	});
 export const command: string = "view [name..]";
 export const desc: string = "View the configuration";
-export function handler(options: ViewConfOpts): Record<string, unknown> | Record<string, unknown>[] {
-	const FN = "conf.view";
-	log.data(FN, "arguments", options, options);
 
-	const { name } = options;
-
-	if (name && name.length > 0) {
-		const items = name.reduce(
-			(acc, item) => {
-				acc[item] = config.get(item) as unknown;
-				return acc;
-			},
-			{} as Record<string, unknown>
-		);
-
-		console.log(items);
-		return items;
+export function handler(options: ViewConfOpts): void {
+	try {
+		const report = runConfView({ name: options.name });
+		if (report.status === "fail") process.exitCode = 1;
+	} catch (err) {
+		console.error(err instanceof CLIError ? style.fail(err.message) : err);
+		process.exitCode = 1;
 	}
-
-	const allConfig = config.store as unknown as Record<string, unknown>;
-	console.log(allConfig);
-	return allConfig;
 }
