@@ -25,7 +25,7 @@
     "lint": "docker run -rm -e RUN_LOCAL=true -v .:/tmp/lint github/super-linter",
     "prepare": "husky",
     "release": "semantic-release",
-    "start": "tsx ./src/cli.ts",
+    "dev": "tsx ./src/cli.ts",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit"
