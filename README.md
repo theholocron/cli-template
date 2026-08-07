@@ -46,8 +46,8 @@ cli-template log
 # Use with debug output
 cli-template log --debug
 
-# Use with sound effects
-cli-template log --sound
+# Use with verbose output
+cli-template log --verbose
 ```
 
 <!-- /holocron:installation -->

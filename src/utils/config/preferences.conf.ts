@@ -6,7 +6,6 @@ export interface PreferencesSchema {
 	debug: boolean;
 	ignoredFolders: string[];
 	notifications: boolean;
-	sound: boolean;
 }
 
 export const preferences = {
@@ -29,10 +28,6 @@ export const preferences = {
 				: path.join(HOME, ".cli-template", "logs")),
 	},
 	notifications: {
-		type: "boolean",
-		default: false,
-	},
-	sound: {
 		type: "boolean",
 		default: false,
 	},

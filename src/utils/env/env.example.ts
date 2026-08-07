@@ -13,7 +13,6 @@ console.log("verbose:", verbose);
 // Map to a typed config shape
 const config = parser.map((get: (key: string) => unknown) => ({
 	debug: Boolean(get("debug")),
-	sound: Boolean(get("sound")),
 	verbose: Boolean(get("verbose")),
 }));
 console.log("config:", config);
