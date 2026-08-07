@@ -2,10 +2,8 @@ import defaultBrowser from "default-browser";
 import open, { apps } from "open";
 
 /**
- * Opens an application if the user confirms.
- *
- * @param {string} name - The name of the application.
- * @returns {Promise<void>} - A promise that resolves to a tuple containing an error (if any), a boolean indicating if the app was opened, and the time taken to perform the operation.
+ * Opens a URL in the user's browser, preferring Chrome/Firefox/Edge.
+ * Falls back to Chrome if the default browser isn't one of those three.
  */
 export async function openBrowser(url: string): Promise<void> {
 	if (!url) {

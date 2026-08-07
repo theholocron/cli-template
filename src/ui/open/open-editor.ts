@@ -26,6 +26,6 @@ export async function openApp(location: string, name?: string, bypass: boolean =
 	if (!bypass) {
 		await prompt.confirm(`Do you want to open ${name}?`, open);
 	} else {
-		open();
+		await open();
 	}
 }

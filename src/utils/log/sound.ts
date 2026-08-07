@@ -1,32 +1,25 @@
+import * as path from "node:path";
+import { fileURLToPath } from "node:url";
+
 import play from "play-sound";
 
 const player = play();
+const mediaDir = path.resolve(fileURLToPath(import.meta.url), "../../../../media");
 
-async function playSound(soundPath: string): Promise<void> {
+async function playSound(file: string): Promise<void> {
 	return new Promise((resolve, reject) => {
-		player.play(soundPath, (err: Error | null) => {
-			if (err) {
-				reject(err);
-			} else {
-				resolve();
-			}
+		player.play(path.join(mediaDir, file), (err: Error | null) => {
+			if (err) reject(err);
+			else resolve();
 		});
 	});
 }
 
 type FeedbackFunction = () => Promise<void>;
 
-const error: FeedbackFunction = async () => {
-	await playSound("./media/error.mp3");
-};
-
-const success: FeedbackFunction = async () => {
-	await playSound("./media/success.mp3");
-};
-
-const warning: FeedbackFunction = async () => {
-	await playSound("./media/warning.mp3");
-};
+const error: FeedbackFunction = () => playSound("error.mp3");
+const success: FeedbackFunction = () => playSound("success.mp3");
+const warning: FeedbackFunction = () => playSound("warning.mp3");
 
 export const sound = {
 	error,
