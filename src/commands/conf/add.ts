@@ -1,4 +1,5 @@
 import type { CommandBuilder } from "yargs";
+
 import { CLIOptions } from "@/cli";
 import { config, log } from "@/utils";
 
@@ -26,24 +27,20 @@ export function handler(options: AddConfOpts): void {
 	log.data(FN, "arguments", options, options);
 
 	const { name, value } = options;
-	const conf = config.get(name);
+	const conf = config.get(name) as unknown;
 
 	if (Array.isArray(conf)) {
 		config.set(name, Array.from(new Set([...conf, value])));
-		const obj = config.get(name);
-		log.success(FN, obj);
-		return obj;
+		log.success(FN, String(config.get(name)));
+		return;
 	}
 
 	if (Object.prototype.toString.call(conf) === "[object Object]") {
-		config.set(name, { ...conf, ...value });
-		const obj = config.get(name);
-		log.success(FN, obj);
-		return obj;
+		config.set(name, { ...(conf as Record<string, unknown>), ...{ value } });
+		log.success(FN, String(config.get(name)));
+		return;
 	}
 
 	config.set(name, value);
-	const obj = config.get(name);
-	log.success(FN, obj);
-	return obj;
+	log.success(FN, String(config.get(name)));
 }

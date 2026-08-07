@@ -1,4 +1,5 @@
 import * as path from "node:path";
+
 import { HOME, OS } from "@/const";
 
 export interface PreferencesSchema {

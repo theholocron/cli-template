@@ -1,4 +1,5 @@
 import { checkbox } from "@inquirer/prompts";
+
 import { type Choice } from "./types";
 
 export async function selectPrompt(

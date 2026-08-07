@@ -1,7 +1,8 @@
+import chalk from "chalk";
 import fs from "fs";
 import readline from "readline";
-import chalk from "chalk";
 import type { CommandBuilder } from "yargs";
+
 import { type CLIOptions } from "@/cli";
 import { config, type LogLevel } from "@/utils";
 

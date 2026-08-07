@@ -1,4 +1,5 @@
 import openEditor from "open-editor";
+
 import { prompt } from "@/ui";
 
 /**

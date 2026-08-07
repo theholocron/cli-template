@@ -3,8 +3,9 @@ import { hideBin } from "yargs/helpers";
 import yargs from "yargs/yargs";
 
 import { __cmddir } from "@/const";
-import pkg from "@/package";
 import * as utils from "@/utils";
+
+import pkg from "../package.json" with { type: "json" };
 
 const { parser } = utils.env;
 

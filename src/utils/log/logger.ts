@@ -1,9 +1,11 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
+
 import winston from "winston";
+
 import { config } from "@/utils";
 
-const LOGS = config.get("preferences.logs");
+const LOGS = config.get("preferences.logs") as string;
 
 if (!fs.existsSync(LOGS)) {
 	fs.mkdirSync(LOGS, { recursive: true });

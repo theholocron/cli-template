@@ -159,6 +159,9 @@ importers:
       sort-package-json:
         specifier: ^4.0.0
         version: 4.0.0
+      tsdown:
+        specifier: ^0.22.14
+        version: 0.22.14(oxc-resolver@11.24.2)(tsx@4.23.9)(typescript@5.9.3)
       tsx:
         specifier: ^4.23.9
         version: 4.23.9

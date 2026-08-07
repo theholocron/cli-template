@@ -1,6 +1,6 @@
 import Conf, { type Schema } from "conf";
-import pkg from "@/package";
 
+import pkg from "../../../package.json" with { type: "json" };
 import { preferences, type PreferencesSchema } from "./preferences.conf";
 
 interface ConfigSchema {

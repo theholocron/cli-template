@@ -2,11 +2,12 @@
   "display": "CLI Template",
   "extends": "@theholocron/tsconfig/node-lts",
   "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "baseUrl": "./",
     "outDir": "./dist",
     "paths": {
-      "@/media": ["./media/*"],
-      "@/package": ["./package.json"],
       "@/*": ["./src/*"]
     }
   },

@@ -1,5 +1,7 @@
 import chalk from "chalk";
+
 import { type CLIOptions } from "@/cli";
+
 import { logger } from "./logger";
 import { sound } from "./sound";
 

@@ -1,4 +1,5 @@
 import type { CommandBuilder } from "yargs";
+
 import { CLIOptions } from "@/cli";
 import { config, log, str } from "@/utils";
 
@@ -14,7 +15,7 @@ export const builder: CommandBuilder<ViewConfOpts, ViewConfOpts> = (yargs) =>
 	});
 export const command: string = "view [name..]";
 export const desc: string = "View the configuration";
-export function handler(options: ViewConfOpts): Record<string, string> | Record<string, string>[] {
+export function handler(options: ViewConfOpts): Record<string, unknown> | Record<string, unknown>[] {
 	const FN = "conf.view";
 	log.data(FN, "arguments", options, options);
 
@@ -23,18 +24,17 @@ export function handler(options: ViewConfOpts): Record<string, string> | Record<
 	if (name && name.length > 0) {
 		const items = name.reduce(
 			(acc, item) => {
-				acc[item] = config.get(item);
+				acc[item] = config.get(item) as unknown;
 				return acc;
 			},
-			{} as Record<string, string>
+			{} as Record<string, unknown>
 		);
 
 		console.log(items);
 		return items;
 	}
 
-	const allConfig = config.get();
-	const obj = { ...allConfig };
-	console.log(obj);
-	return obj;
+	const allConfig = config.store as unknown as Record<string, unknown>;
+	console.log(allConfig);
+	return allConfig;
 }

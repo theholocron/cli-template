@@ -1,2 +1,2 @@
 export { open } from "./open";
-export { prompt, type Choice } from "./prompts";
+export { type Choice, prompt } from "./prompts";

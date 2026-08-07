@@ -1,21 +1,19 @@
 import { env } from "@/utils";
 
-const [err, data] = env.read();
+const { parser } = env;
 
-if (err) {
-	console.error(err);
-	process.exit(1);
-}
+// Read all env vars under the configured namespace(s)
+const debug = parser.get("debug");
+console.log("debug:", debug);
 
-console.log("Complete env");
-console.log(data);
+// Read a specific key
+const verbose = parser.get("verbose");
+console.log("verbose:", verbose);
 
-const [singleErr, singleData] = env.read("VERBOSE");
-
-if (singleErr) {
-	console.error(singleErr);
-	process.exit(1);
-}
-
-console.log("Single key env");
-console.log(singleData);
+// Map to a typed config shape
+const config = parser.map((get: (key: string) => unknown) => ({
+	debug: Boolean(get("debug")),
+	sound: Boolean(get("sound")),
+	verbose: Boolean(get("verbose")),
+}));
+console.log("config:", config);

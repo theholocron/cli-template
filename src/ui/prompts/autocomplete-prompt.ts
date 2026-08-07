@@ -1,4 +1,5 @@
 import autocomplete from "inquirer-autocomplete-standalone";
+
 // import { type CLIOptions } from "@/cli";
 import { type Choice } from "./types";
 
