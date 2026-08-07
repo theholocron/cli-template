@@ -23,6 +23,7 @@ export default defineConfig({
 	workflows: [
 		...workflows,
 		"audit",
+		{ name: "test", with: { "run-unit": true } },
 		{ name: "release", with: { "run-build": true } },
 		{
 			name: "deploy-docs",

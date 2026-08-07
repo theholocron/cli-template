@@ -27,20 +27,15 @@ export function handler(options: AddConfOpts): void {
 	log.data(FN, "arguments", options, options);
 
 	const { name, value } = options;
-	const conf = config.get(name) as unknown;
+	const existing = config.get(name) as unknown;
 
-	if (Array.isArray(conf)) {
-		config.set(name, Array.from(new Set([...conf, value])));
-		log.success(FN, String(config.get(name)));
-		return;
+	if (Array.isArray(existing)) {
+		config.set(name, Array.from(new Set([...existing, value])));
+	} else if (existing !== null && typeof existing === "object") {
+		config.set(name, { ...(existing as Record<string, unknown>), [name]: value });
+	} else {
+		config.set(name, value);
 	}
 
-	if (Object.prototype.toString.call(conf) === "[object Object]") {
-		config.set(name, { ...(conf as Record<string, unknown>), ...{ value } });
-		log.success(FN, String(config.get(name)));
-		return;
-	}
-
-	config.set(name, value);
 	log.success(FN, String(config.get(name)));
 }

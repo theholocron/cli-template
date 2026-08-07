@@ -1,72 +1,49 @@
-import chalk from "chalk";
-
 import { type CLIOptions } from "@/cli";
+import { style } from "@/utils/style";
 
 import { logger } from "./logger";
 import { sound } from "./sound";
 
-type LoggerFunction = (prefix: string, message: string, options?: CLIOptions) => void;
-
-const bold = (str: string) => chalk.magenta.bold(str);
-
 const data = (prefix: string, key: string, message: unknown, options: CLIOptions) => {
 	if (options?.debug) {
-		console.log(chalk.cyan(`[${prefix}]:`), chalk.bgWhiteBright(`${key}:`), message);
+		logger.debug(`[${prefix}] ${key}: ${String(message)}`);
+		console.log(style.hint(`[${prefix}] ${key}:`), message);
 	}
 };
 
-const error: LoggerFunction = (prefix, message, options) => {
-	logger.error(`[${prefix}] error: ${message}`);
-
-	console.log(chalk.red.bold(message));
-	if (options?.sound) {
-		sound.error();
-	}
+const error = (prefix: string, message: string, options?: CLIOptions) => {
+	logger.error(`[${prefix}] ${message}`);
+	console.log(style.fail(message));
+	if (options?.sound) sound.error();
 };
 
-const info: LoggerFunction = (prefix, message, options) => {
-	logger.info(`[${prefix}] info: ${message}`);
-
-	if (options?.debug) {
-		console.log(chalk.cyan(`[${prefix}]:`), message);
-	}
+const info = (prefix: string, message: string, options?: CLIOptions) => {
+	logger.info(`[${prefix}] ${message}`);
+	if (options?.debug) console.log(style.step(`[${prefix}] ${message}`));
 };
 
-const processing: LoggerFunction = (prefix, message, options) => {
-	logger.info(`[${prefix}] processing: ${message}`);
-
-	if (options?.debug) {
-		console.log(chalk.magenta(`[${prefix}]:`), message);
-	}
+const processing = (prefix: string, message: string, options?: CLIOptions) => {
+	logger.info(`[${prefix}] ${message}`);
+	if (options?.debug) console.log(style.hint(`[${prefix}] ${message}`));
 };
 
-const success: LoggerFunction = (prefix, message, options) => {
-	logger.info(`[${prefix}] success: ${message}`);
-
-	console.log(chalk.green.bold(message));
-	if (options?.sound) {
-		sound.success();
-	}
+const success = (prefix: string, message: string, options?: CLIOptions) => {
+	logger.info(`[${prefix}] ${message}`);
+	console.log(style.success(message));
+	if (options?.sound) sound.success();
 };
 
-const warning: LoggerFunction = (prefix, message, options) => {
-	logger.warn(`[${prefix}] warning: ${message}`);
-
-	console.log(chalk.yellow.bold(message));
-	if (options?.sound) {
-		sound.warning();
-	}
+const warning = (prefix: string, message: string, options?: CLIOptions) => {
+	logger.warn(`[${prefix}] ${message}`);
+	console.log(style.warn(message));
+	if (options?.sound) sound.warning();
 };
 
 export const log = {
-	bold,
 	data,
 	error,
 	info,
 	process: processing,
 	success,
-	style: {
-		bold,
-	},
 	warning,
 };
