@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/theholocron/cli-template/compare/v1.1.1...v1.2.0) (2026-08-12)
+
+### Features
+
+* ✨ add Sentry telemetry ([#120](https://github.com/theholocron/cli-template/issues/120)) ([9e1affe](https://github.com/theholocron/cli-template/commit/9e1affe0f1d6931463a5bb33ad632ba914469ebc))
+
 ## [1.1.1](https://github.com/theholocron/cli-template/compare/v1.1.0...v1.1.1) (2026-08-12)
 
 ### Bug Fixes
