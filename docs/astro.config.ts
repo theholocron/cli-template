@@ -4,7 +4,7 @@ import { defineConfig } from "astro/config";
 
 export default defineConfig({
 	site: "https://theholocron.github.io",
-	base: "/cli-template",
+	base: "/projects/cli-template",
 	integrations: [
 		starlight({
 			title: "CLI Template",
