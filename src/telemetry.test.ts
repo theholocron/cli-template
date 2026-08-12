@@ -100,6 +100,7 @@ describe("init", () => {
 	});
 
 	it("sets os, node, and ci tags", () => {
+		delete process.env["CI"];
 		init("1.0.0");
 		expect(Sentry.setTag).toHaveBeenCalledWith("os", process.platform);
 		expect(Sentry.setTag).toHaveBeenCalledWith("node", process.version);
