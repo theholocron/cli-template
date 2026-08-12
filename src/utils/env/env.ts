@@ -7,7 +7,7 @@ import { createEnvParser, type EnvParser } from "@theholocron/env-utils";
 // tooling and runtime stay in sync.
 // Add org-wide prefixes before the project-specific one:
 //   ["HOLOCRON", "CLI_TEMPLATE"]  →  HOLOCRON_* as defaults, CLI_TEMPLATE_* overrides
-const NAMESPACES = ["CLI_TEMPLATE"] as const;
+const NAMESPACES = ["HOLOCRON", "CLI_TEMPLATE"] as const;
 
 export const parser: EnvParser = createEnvParser({
 	appName: "cli-template",
