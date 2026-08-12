@@ -14,6 +14,9 @@ importers:
       '@inquirer/prompts':
         specifier: ^8.5.2
         version: 8.5.2(@types/node@26.1.2)
+      '@sentry/node':
+        specifier: ^10.69.0
+        version: 10.69.0(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))
       '@theholocron/env-utils':
         specifier: ^1.2.1
         version: 1.2.1(dotenv@17.4.2)
