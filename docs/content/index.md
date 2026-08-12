@@ -42,12 +42,12 @@ CLI_TEMPLATE_DEBUG=true cli-template log
 
 Copy `.env.example` to `.env`. Variables follow a two-level namespace cascade: `HOLOCRON_*` sets org-wide defaults, `CLI_TEMPLATE_*` overrides them per-tool. Replace both prefixes consistently when building on this template.
 
-| Variable                    | Default | Description                                    |
-| --------------------------- | ------- | ---------------------------------------------- |
-| `CLI_TEMPLATE_DEBUG`        | `false` | Enable debug output                            |
-| `CLI_TEMPLATE_VERBOSE`      | `false` | Enable verbose logging                         |
-| `CLI_TEMPLATE_SENTRY_DSN`   | —       | Sentry DSN — enables error telemetry when set  |
-| `CLI_TEMPLATE_NO_TELEMETRY` | —       | Set to any value to opt out of error telemetry |
+| Variable                    | Default | Description                                                                  |
+| --------------------------- | ------- | ---------------------------------------------------------------------------- |
+| `CLI_TEMPLATE_DEBUG`        | `false` | Enable debug output                                                          |
+| `CLI_TEMPLATE_VERBOSE`      | `false` | Enable verbose logging                                                       |
+| `CLI_TEMPLATE_SENTRY_DSN`   | —       | Sentry DSN — enables error telemetry when set (see [Telemetry](./telemetry)) |
+| `CLI_TEMPLATE_NO_TELEMETRY` | —       | Set to any value to opt out of error telemetry                               |
 
 ## Project Structure
 
