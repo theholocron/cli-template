@@ -1,16 +1,18 @@
 import type { ErrorEvent, EventHint } from "@sentry/node";
 import * as Sentry from "@sentry/node";
 
-// Set SENTRY_DSN in your environment (or .env) to enable telemetry.
-// Empty string = telemetry silently disabled — safe to ship before the project exists.
+import { env } from "@/utils/env";
+
+// Set CLI_TEMPLATE_SENTRY_DSN in your environment (or .env) to enable telemetry.
+// Opt out at any time with CLI_TEMPLATE_NO_TELEMETRY=1.
 function isEnabled(): boolean {
-	return !process.env.NO_CLI_TEMPLATE_TELEMETRY && Boolean(process.env.SENTRY_DSN);
+	return !env.parser.get("no_telemetry") && Boolean(env.parser.get("sentry_dsn"));
 }
 
 export function init(version: string): void {
 	if (!isEnabled()) return;
 	Sentry.init({
-		dsn: process.env.SENTRY_DSN,
+		dsn: String(env.parser.get("sentry_dsn")),
 		release: `cli-template@${version}`,
 		environment: process.env.CI ? "ci" : "local",
 		tracesSampleRate: 1.0,

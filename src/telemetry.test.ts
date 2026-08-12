@@ -12,6 +12,12 @@ vi.mock("@sentry/node", () => ({
 	close: vi.fn().mockResolvedValue(undefined),
 }));
 
+const { mockGet } = vi.hoisted(() => ({ mockGet: vi.fn() }));
+
+vi.mock("@/utils/env", () => ({
+	env: { parser: { get: mockGet } },
+}));
+
 import * as Sentry from "@sentry/node";
 
 type MockSpan = { setStatus: ReturnType<typeof vi.fn>; end: ReturnType<typeof vi.fn> };
@@ -24,8 +30,12 @@ function lastSpan(): MockSpan {
 const originalEnv = process.env;
 
 beforeEach(() => {
-	process.env = { ...originalEnv, NO_CLI_TEMPLATE_TELEMETRY: undefined, SENTRY_DSN: "https://test@sentry.io/1" };
+	process.env = { ...originalEnv, CI: undefined };
+	// Default: enabled (DSN set, no opt-out)
+	mockGet.mockImplementation((key: string) => (key === "sentry_dsn" ? "https://test@sentry.io/1" : undefined));
 	vi.clearAllMocks();
+	// Re-apply default after clearAllMocks
+	mockGet.mockImplementation((key: string) => (key === "sentry_dsn" ? "https://test@sentry.io/1" : undefined));
 });
 
 afterEach(() => {
@@ -34,9 +44,13 @@ afterEach(() => {
 
 // ── opt-out ───────────────────────────────────────────────────────────────────
 
-describe("when NO_CLI_TEMPLATE_TELEMETRY is set", () => {
+describe("when CLI_TEMPLATE_NO_TELEMETRY is set", () => {
 	beforeEach(() => {
-		process.env["NO_CLI_TEMPLATE_TELEMETRY"] = "1";
+		mockGet.mockImplementation((key: string) => {
+			if (key === "no_telemetry") return "1";
+			if (key === "sentry_dsn") return "https://test@sentry.io/1";
+			return undefined;
+		});
 	});
 
 	it("init: skips Sentry.init", () => {
@@ -66,9 +80,9 @@ describe("when NO_CLI_TEMPLATE_TELEMETRY is set", () => {
 	});
 });
 
-describe("when SENTRY_DSN is not set", () => {
+describe("when CLI_TEMPLATE_SENTRY_DSN is not set", () => {
 	beforeEach(() => {
-		delete process.env["SENTRY_DSN"];
+		mockGet.mockReturnValue(undefined);
 	});
 
 	it("init: skips Sentry.init", () => {
