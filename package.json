@@ -41,6 +41,7 @@
     "yargs": "^17.7.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^21.2.1",
     "@eslint/js": "^10.0.1",
     "@semantic-release/changelog": "^7.0.0",
     "@semantic-release/exec": "^7.1.0",
