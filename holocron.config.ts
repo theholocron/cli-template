@@ -25,7 +25,7 @@ export default defineConfig({
 		"audit",
 		{ name: "test", with: { "run-unit": true } },
 		{ name: "release", with: { "run-build": true } },
-		{ name: "deploy", with: { type: "docs", name: "cli-template" }, paths: ["docs/**"] },
+		{ name: "deploy", with: { docs: true } },
 	],
 	providers: {
 		...providers,
