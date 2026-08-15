@@ -10,7 +10,7 @@ In non-TTY environments (CI, pipes, tests) the spinner is skipped entirely and `
 import { withSpinner } from "@/ui";
 
 const result = await withSpinner("Fetching data…", async () => {
-	return await fetchSomething();
+  return await fetchSomething();
 });
 ```
 
