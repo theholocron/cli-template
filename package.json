@@ -20,6 +20,7 @@
     "dist/*"
   ],
   "scripts": {
+    "audit": "knip",
     "build": "tsdown",
     "postbuild": "mkdir -p man && marked-man README.md > man/cli-template.1",
     "dev": "tsx ./src/cli.ts",
