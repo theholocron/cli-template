@@ -13,6 +13,7 @@ export default defineConfig({
 		topics: ["cli", "nodejs", "template", "typescript"],
 		...repo,
 		protection: "strict",
+		requiredChecks: ["audit / Knip", "codecov/patch", "codecov/project"],
 		properties: {
 			...repo.properties,
 			runtime_environment: "node",
