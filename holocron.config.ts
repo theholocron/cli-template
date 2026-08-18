@@ -12,7 +12,7 @@ export default defineConfig({
 		teams: [{ slug: "gatekeepers", permission: "maintain" }],
 		topics: ["cli", "nodejs", "template", "typescript"],
 		...repo,
-		protection: "balanced",
+		protection: "strict",
 		properties: {
 			...repo.properties,
 			runtime_environment: "node",
@@ -22,7 +22,7 @@ export default defineConfig({
 	},
 	workflows: [
 		...workflows,
-		"audit",
+		{ name: "audit", with: { "run-knip": true } },
 		{ name: "test", with: { "run-unit": true } },
 		{ name: "release", with: { "run-build": true } },
 		{ name: "deploy", with: { docs: true } },
