@@ -3,8 +3,16 @@ import type { KnipConfig } from "knip";
 const config: KnipConfig = {
 	workspaces: {
 		".": {
-			// src/cli.ts, commitlint.config.ts, vitest.config.ts auto-detected by Knip plugins
-			entry: ["holocron.config.ts", "src/**/*.test.ts"],
+			entry: [
+				// commands loaded dynamically via yargs commandDir() — not statically imported
+				"src/commands/**/*.ts",
+				// public UI API barrel and example files — shipped for consumers, not used internally
+				"src/ui/index.ts",
+				"src/**/*.example.ts",
+				// test files
+				"src/**/*.test.ts",
+				"holocron.config.ts",
+			],
 			project: ["src/**/*.ts", "*.config.ts"],
 			// astro.config.ts is the docs build config, not an Astro workspace — disable plugin
 			astro: false,
@@ -15,9 +23,6 @@ const config: KnipConfig = {
 		},
 	},
 	ignoreDependencies: [
-		// commitlint "extends" uses string shorthand
-		"@theholocron/commitlint-config",
-		"@theholocron",
 		// passed as --config arg to lint-staged binary in .husky/pre-commit
 		"@theholocron/lint-staged-config",
 		// loaded at runtime by the holocron plugin system — not a static import
@@ -25,6 +30,7 @@ const config: KnipConfig = {
 		// skills referenced as strings in holocron.config.ts
 		"@theholocron/skills",
 		// binary tools — invoked via CLI or hooks, not module imports
+		"alex",
 		"sort-package-json",
 	],
 	ignoreExportsUsedInFile: true,
