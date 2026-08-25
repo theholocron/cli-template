@@ -65,6 +65,8 @@ Copy `.env.example` to `.env` and configure as needed. Variables follow a two-le
 
 ## Development
 
+<!-- holocron:development -->
+
 ```bash
 pnpm build         # compile src/ → dist/
 pnpm dev         # run via tsx (no build needed)
@@ -73,6 +75,8 @@ pnpm test:coverage # run tests with coverage
 pnpm typecheck     # type-check without emitting
 pnpm lint          # run super-linter locally (requires Docker)
 ```
+
+<!-- /holocron:development -->
 
 ## What's Included
 
@@ -91,4 +95,8 @@ pnpm lint          # run super-linter locally (requires Docker)
 
 ## Releases
 
+<!-- holocron:releases -->
+
 Releases are automated via [semantic-release](https://semantic-release.gitbook.io) on push to `main`. See [CHANGELOG.md](CHANGELOG.md) for the release history.
+
+<!-- /holocron:releases -->
