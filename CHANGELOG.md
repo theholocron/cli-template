@@ -1,3 +1,9 @@
+## [1.3.6](https://github.com/theholocron/cli-template/compare/v1.3.5...v1.3.6) (2026-08-26)
+
+### Chores
+
+* **deps:** bump the all-dependencies group with 17 updates ([#141](https://github.com/theholocron/cli-template/issues/141)) ([1853bad](https://github.com/theholocron/cli-template/commit/1853bad22119a11c240ee5fd50c2652b503406d6))
+
 ## [1.3.5](https://github.com/theholocron/cli-template/compare/v1.3.4...v1.3.5) (2026-08-26)
 
 ### Bug Fixes
