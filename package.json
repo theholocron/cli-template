@@ -105,7 +105,7 @@
       "esbuild"
     ],
     "overrides": {
-      "conventional-changelog-conventionalcommits": "9.3.1"
+      "conventional-changelog-conventionalcommits": "10.4.0"
     }
   },
   "releases": "https://github.com/theholocron/cli-template/releases",
