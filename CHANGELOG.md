@@ -1,3 +1,15 @@
+## [1.3.5](https://github.com/theholocron/cli-template/compare/v1.3.4...v1.3.5) (2026-08-26)
+
+### Bug Fixes
+
+* 🐛 pin conventional-changelog-conventionalcommits to 9.3.1 ([#140](https://github.com/theholocron/cli-template/issues/140)) ([aae2500](https://github.com/theholocron/cli-template/commit/aae2500352e211b61e47293cd5cc070360dd07a6))
+
+### Chores
+
+* 🔧 📚️ add development and releases marker blocks to README ([#139](https://github.com/theholocron/cli-template/issues/139)) ([91f1674](https://github.com/theholocron/cli-template/commit/91f16743f06be457f01c1fa41a3596ad94a8af9b))
+* 🔧 bump eslint-config to 7.23.1 ([#137](https://github.com/theholocron/cli-template/issues/137)) ([4f6e891](https://github.com/theholocron/cli-template/commit/4f6e891b44e25e1a1e86bc865a437102bb571ae4))
+* add sync workflow to holocron.config ([#138](https://github.com/theholocron/cli-template/issues/138)) ([723df33](https://github.com/theholocron/cli-template/commit/723df3319ad1ad06943a7eb48d6a8c6f6af31382)), closes [theholocron/configs#382](https://github.com/theholocron/configs/issues/382)
+
 ## [1.3.4](https://github.com/theholocron/cli-template/compare/v1.3.3...v1.3.4) (2026-08-20)
 
 ## [1.3.3](https://github.com/theholocron/cli-template/compare/v1.3.2...v1.3.3) (2026-08-20)
