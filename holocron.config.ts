@@ -1,8 +1,8 @@
 import type { HolocronConfig } from "@theholocron/cli";
 import { defineConfig } from "@theholocron/cli";
-import { node } from "@theholocron/holocron-config";
+import { compose, node, wikiCapability as wiki } from "@theholocron/holocron-config";
 
-const { repo, workflows, providers } = node();
+const { repo, workflows, providers } = compose(node(), wiki());
 export default defineConfig({
 	description:
 		"A modern CLI template with pre-configured tools, best practices, and CI/CD setup for rapid project development.",
