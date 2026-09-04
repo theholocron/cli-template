@@ -2,7 +2,7 @@
 # Source:  theholocron/holocron · packages/cli/src/commands/setup-workflows.ts
 # Tool:    holocron setup
 # Changes: run `holocron setup` to regenerate.
-name: CodeQL
+name: Security
 
 on: # yamllint disable-line rule:truthy
   push:
@@ -20,6 +20,6 @@ permissions:
   security-events: write
 
 jobs:
-  codeql:
-    uses: theholocron/.github/.github/workflows/codeql.yml@main
+  security:
+    uses: theholocron/.github/.github/workflows/security.yml@main
     secrets: inherit
