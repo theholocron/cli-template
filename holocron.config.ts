@@ -32,6 +32,7 @@ export default defineConfig({
 	providers: {
 		...providers,
 		secrets: "github",
+		wiki: ["fern", { domain: "wiki.theholocron.dev", fernOrg: "holocron", icon: "fa-duotone fa-copy" }],
 	},
 	docs: { build: "workflow", https: true },
 	agent: "claude",
