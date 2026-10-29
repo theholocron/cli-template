@@ -13,7 +13,7 @@ A modern CLI template with pre-configured tools, best practices, and CI/CD setup
 - **[Winston](https://github.com/winstonjs/winston)** — structured file logging (error, warn, info, verbose, debug)
 - **[Chalk](https://github.com/chalk/chalk)** — terminal colour output
 - **[Ora](https://github.com/sindresorhus/ora)** — spinner for long-running tasks
-- **[@theholocron/env-utils](https://github.com/theholocron/utils)** — namespace-scoped env var parsing with `HOLOCRON_*` → `CLI_TEMPLATE_*` cascade
+- **[@theholocron/env-utils](https://github.com/theholocron/holocron/tree/alpha/utils/env-utils)** — namespace-scoped env var parsing with `HOLOCRON_*` → `CLI_TEMPLATE_*` cascade
 - **[Sentry](https://sentry.io)** — error tracking and command-level tracing; opt-in via `CLI_TEMPLATE_SENTRY_DSN`
 - **[update-notifier](https://github.com/yeoman/update-notifier)** — nudges users to upgrade when a new version is published
 
