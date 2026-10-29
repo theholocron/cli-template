@@ -1,6 +1,6 @@
 # Environment Variables
 
-A wrapper around [`@theholocron/env-utils`](https://github.com/theholocron/utils) that provides namespace-scoped environment variable parsing with cascade priority.
+A wrapper around [`@theholocron/env-utils`](https://github.com/theholocron/holocron/tree/alpha/utils/env-utils) that provides namespace-scoped environment variable parsing with cascade priority.
 
 The parser reads from `process.env` (populated by the shell or a `.env` file loaded upstream) and resolves values under the `CLI_TEMPLATE_*` namespace.
 

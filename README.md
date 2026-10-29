@@ -87,7 +87,7 @@ pnpm lint          # run super-linter locally (requires Docker)
 | **Config**        | [Conf](https://github.com/sindresorhus/conf)                                         | Persistent user preferences with JSON-schema validation             |
 | **Logging**       | [Winston](https://github.com/winstonjs/winston)                                      | Structured file logging; terminal output via style utilities        |
 | **Terminal UI**   | [Chalk](https://github.com/chalk/chalk) + [Ora](https://github.com/sindresorhus/ora) | Colour output and spinners for long-running tasks                   |
-| **Environment**   | [@theholocron/env-utils](https://github.com/theholocron/utils)                       | Namespace-scoped env var parsing with cascade priority              |
+| **Environment**   | [@theholocron/env-utils](https://github.com/theholocron/holocron/tree/alpha/utils/env-utils)                       | Namespace-scoped env var parsing with cascade priority              |
 | **Updates**       | [update-notifier](https://github.com/yeoman/update-notifier)                         | Prompts users to upgrade when a new version is published            |
 | **Telemetry**     | [Sentry](https://sentry.io)                                                          | Error tracking and command-level tracing; disabled until DSN is set |
 | **Build**         | [tsdown](https://tsdown.dev/)                                                        | Compiles `src/cli.ts` → `dist/cli.mjs` with a Node.js shebang       |
