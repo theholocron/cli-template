@@ -10,7 +10,7 @@
   "homepage": "https://docs.theholocron.dev/cli-template/",
   "bugs": "https://github.com/theholocron/cli-template/issues",
   "repository": "theholocron/cli-template",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "author": "Newton Koumantzelis",
   "sideEffects": false,
   "type": "module",
