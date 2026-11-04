@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@inquirer/prompts": "^8.5.2",
-    "@sentry/node": "^10.69.0",
+    "@sentry/node": "^11.10.0",
     "@theholocron/env-utils": "^1.2.1",
     "chalk": "^6.0.0",
     "conf": "^15.1.0",
